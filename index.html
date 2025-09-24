@@ -1,0 +1,21 @@
+<form id="form">
+  <input id="name" placeholder="Nombre" />
+  <input id="email" placeholder="Email" />
+  <button type="submit">Crear</button>
+</form>
+
+<script>
+  document.getElementById("form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    
+    const res = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email })
+    });
+    const data = await res.json();
+    alert("Usuario creado: " + data.name);
+  });
+</script>
